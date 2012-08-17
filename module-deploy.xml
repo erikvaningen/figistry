@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+   This build file provides deployment service
+   for the FigisFactsheets module.
+   
+   Public targest :
+     deploy
+     
+-->     
+<project default="deploy" name="module-deploy">
+	
+	<property name="build.deploy.home.dir" value="${build.deploy.target}/webapps/figis"/>
+	<property name="build.deploy.module" value="FigisFactsheets"/>
+	
+	<property name="build.deploy.jars.dir" value="${build.deploy.home.dir}/WEB-INF/lib"/>
+	<property name="build.deploy.properties.dir" value="${build.deploy.home.dir}/WEB-INF/properties"/>
+
+	<echoproperties prefix="build.deploy."/>
+	
+	<target name="check-target-property">
+		<fail message="build.deploy.target undefined" unless="build.deploy.target"/>	
+	</target>
+	
+	<!--
+    ================================================
+
+      deploy
+ 
+    ================================================
+	-->
+	<target name="deploy" 
+		description="Module deployment"
+        depends="check-target-property, deploy-jars">
+	</target>
+	<!--
+		deploy-jars
+	-->
+	<target name="deploy-jars">
+		<mkdir dir="${build.deploy.jars.dir}"/>
+		<copy todir="${build.deploy.jars.dir}" includeEmptyDirs="no" failonerror="false" overwrite="true">
+			<fileset dir="${build.dist.jars.dir}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+	<!--
+		deploy-porperties
+	-->
+	<!--
+	<target name="deploy-properties">
+		<mkdir dir="${build.deploy.properties.dir}"/>
+		<copy todir="${build.deploy.properties.dir}" includeEmptyDirs="no" failonerror="false">
+			<fileset dir="${build.dist.src.properties.dir}">
+				<include name="DomainPaths.properties"/>
+				<include name="RefObjects.properties"/>
+				<include name="TableAccessorFactory.properties"/>
+				<include name="uploadcfg.properties"/>
+			</fileset>
+		</copy>
+		<mkdir dir="${build.deploy.properties.dir}/common"/>
+		<copy todir="${build.deploy.properties.dir}/common" includeEmptyDirs="no" failonerror="false">
+			<fileset dir="${build.dist.src.properties.dir}">
+				<include name="**"/>
+				<exclude name="DomainPaths.properties"/>
+				<exclude name="RefObjects.properties"/>
+				<exclude name="TableAccessorFactory.properties"/>
+				<exclude name="uploadcfg.properties"/>
+			</fileset>
+		</copy>
+	</target>
+		-->
+</project>

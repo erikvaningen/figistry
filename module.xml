@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="FigisFactsheets">
+	<desc>Figis Fact Sheets</desc>
+	<dependencies>
+		<module>FigisUtil:PRO</module>
+		<module>RefService:PRO</module>
+		<module>StatQuery:PRO</module>
+	</dependencies>
+</module>
